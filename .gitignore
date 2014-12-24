@@ -83,3 +83,6 @@ cscope.*
 
 # patches
 *.patch
+
+# current config
+!.config
