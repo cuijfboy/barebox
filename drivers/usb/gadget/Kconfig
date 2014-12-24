@@ -1,0 +1,51 @@
+menuconfig USB_GADGET
+	select USB
+	bool "USB gadget support"
+
+if USB_GADGET
+
+config USB_GADGET_DUALSPEED
+	bool
+
+config USB_GADGET_DRIVER_ARC
+	bool
+	prompt "Arc OTG device core"
+	depends on ARCH_IMX || ARCH_MXS
+	default y
+	select USB_GADGET_DUALSPEED
+	select POLLER
+
+config USB_GADGET_DRIVER_AT91
+	bool
+	prompt "at91 gadget driver"
+	depends on ARCH_AT91
+	default y
+	select USB_GADGET_DUALSPEED
+	select POLLER
+
+config USB_GADGET_DRIVER_PXA27X
+	bool
+	prompt "PXA27x gadget driver"
+	depends on ARCH_PXA
+	default y
+	select USB_GADGET_DUALSPEED
+	select POLLER
+
+comment "USB Gadget drivers"
+
+config USB_GADGET_DFU
+	bool
+	select FILE_LIST
+	prompt "Device Firmware Update Gadget"
+
+config USB_GADGET_SERIAL
+	bool
+	depends on !CONSOLE_NONE
+	prompt "Serial Gadget"
+
+config USB_GADGET_FASTBOOT
+	bool
+	select BANNER
+	prompt "Android Fastboot support"
+
+endif
